@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Fellas Soundboard</title>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="overlay">
+      <h1>Fellas, how we feeling? 🌞</h1>
+      <h3>A simple soundboard for the fellas to express how it be sometimes</h3>
+      <br>
+      <button style="font-size: 12px;" onclick=" window.open('https://github.com/KevinApodaca', '_blank')">Made with JS and ❤️ by Kevin Apodaca <br><i class="fa fa-github" style="font-size: 25px;"></i></button>
+    </div>
+  </header>
+
+    <!-- Keys Layout -->
+    <div class="keys">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="sound">WTF</span>
+        </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+          <span class="sound">Oof</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+          <span class="sound">Thankful</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+          <span class="sound">Bruh</span>
+        </div>
+        <div data-key="71" class="key">
+          <kbd>G</kbd>
+          <span class="sound">Sad</span>
+        </div>
+        <div data-key="72" class="key">
+          <kbd>H</kbd>
+          <span class="sound">Clapped</span>
+        </div>
+        <div data-key="74" class="key">
+          <kbd>J</kbd>
+          <span class="sound">Mhm</span>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+          <span class="sound">Maaan</span>
+        </div>
+        <div data-key="76" class="key">
+          <kbd>L</kbd>
+          <span class="sound">??!?!</span>
+        </div>
+      </div>
+
+    <!-- Audio Binds -->
+      <audio data-key="65" src="sounds/jay.wav"></audio>
+      <audio data-key="83" src="sounds/oof.mp3"></audio>
+      <audio data-key="68" src="sounds/thankful.wav"></audio>
+      <audio data-key="70" src="sounds/bruh.mp3"></audio>
+      <audio data-key="71" src="sounds/sad.mp3"></audio>
+      <audio data-key="72" src="sounds/clap.wav"></audio>
+      <audio data-key="74" src="sounds/mhm.wav"></audio>
+      <audio data-key="75" src="sounds/man.wav"></audio>
+      <audio data-key="76" src="sounds/confused.wav"></audio>
+
+  <!-- Javascript -->
+    <script>
+      function playSounds(e){
+        /* Set the audio based on key input */
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if(!audio)return;
+        audio.currentTime = 0;
+        audio.play();
+        key.classList.add('playing');
+      }
+      
+      function removeTransition(e){
+        if (e.propertyName !== 'transform') return;
+        this.classList.remove('playing');
+      }
+    
+      const keys = document.querySelectorAll('.key');
+      keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+      window.addEventListener('keydown',playSounds); 
+    
+    </script>
+    
+</body>
+</html>
